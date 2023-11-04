@@ -69,10 +69,10 @@ class TestGetFirebaseToken:
         )
 
     def test_successful_token_retrieval(self, monkeypatch):
-        # Mock send_request for a successful response
-        mock_send_request = Mock()
-        mock_send_request.return_value.text = "token=sample_token"
-        monkeypatch.setattr("ohme.firebase.send_request", mock_send_request)
+        # Mock post_dict for a successful response
+        mock_post_dict = Mock()
+        mock_post_dict.return_value.text = "token=sample_token"
+        monkeypatch.setattr("ohme.firebase.post_dict", mock_post_dict)
 
         token = get_firebase_token()
         assert token == "sample_token"
@@ -80,17 +80,17 @@ class TestGetFirebaseToken:
         # Check that the mocked functions were called with the correct parameters
         self.mock_get_firebase_auth_headers.assert_called()
         self.mock_get_firebase_auth_body.assert_called()
-        mock_send_request.assert_called_with(
+        mock_post_dict.assert_called_with(
             "https://fcmtoken.googleapis.com/register",
             {"mocked": "headers"},
             {"mocked": "body"},
         )
 
     def test_error_response(self, monkeypatch):
-        # Mock send_request for an error response
+        # Mock post_dict for an error response
         mock_error_response = Mock()
         mock_error_response.return_value.text = "error=Missing+registration+token"
-        monkeypatch.setattr("ohme.firebase.send_request", mock_error_response)
+        monkeypatch.setattr("ohme.firebase.post_dict", mock_error_response)
 
         with pytest.raises(Exception) as exc_info:
             get_firebase_token()
