@@ -46,8 +46,6 @@ class TestPostDict:
         with pytest.raises(ZeroDivisionError):
             post_dict("https://example.com", {"Header": "Value"}, {"Param": "Value"})
 
-
-class TestPostDict:
     @patch.object(httpx, "Request")
     @patch.object(httpx.Client, "send")
     def test_request_parameters(self, mock_send, mock_request):
