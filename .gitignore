@@ -164,3 +164,5 @@ cython_debug/
 !.env.project
 !.env.vault
 !.env.example
+
+tmp
