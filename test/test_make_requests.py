@@ -1,73 +1,122 @@
+import os
+import sys
 import pytest
 import httpx
-from ohme.make_requests import post_dict, SendRequestError
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch, Mock
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+from ohme import make_requests
 
 
-class TestPostDict:
-    @pytest.fixture(autouse=True)
-    def setup_method(self, monkeypatch):
-        # Mock the httpx.Request constructor
-        self.mock_request = MagicMock()
-        monkeypatch.setattr("httpx.Request", lambda *args, **kwargs: self.mock_request)
-
-    def test_successful_post(self, monkeypatch):
-        # Mock the httpx.Client.send method to return a successful response
-        mock_response = MagicMock()
-        mock_response.raise_for_status.return_value = None  # No exception is raised
-        monkeypatch.setattr("httpx.Client.send", lambda self, request: mock_response)
-
-        response = post_dict(
-            "https://example.com", {"Header": "Value"}, {"Param": "Value"}
+class TestSendRequest:
+    # Parameterized test for successful requests
+    @pytest.mark.parametrize(
+        "method, params, data, json_body, response_content, response_headers, expected_json",
+        [
+            ("GET", None, None, None, b"OK", {"Content-Type": "text/plain"}, None),
+            (
+                "POST",
+                {"key1": "value1"},
+                None,
+                None,
+                b"OK",
+                {"Content-Type": "text/plain"},
+                None,
+            ),
+            (
+                "POST",
+                None,
+                {"key2": "value2"},
+                None,
+                b'{"status": "OK"}',
+                {"Content-Type": "application/json"},
+                {"status": "OK"},
+            ),
+            (
+                "POST",
+                None,
+                {"key2": "value2"},
+                None,
+                b'{"status": "OK"}',
+                {"Content-Type": "text/plain"},  # missing JSON content type is ignored
+                {"status": "OK"},
+            ),
+            (
+                "GET",
+                None,
+                None,
+                None,
+                b"not json",
+                {"Content-Type": "application/json"},
+                None,
+            ),
+        ],
+    )
+    def test_send_request_success(
+        self,
+        method,
+        params,
+        data,
+        json_body,
+        response_content,
+        response_headers,
+        expected_json,
+    ):
+        # Create Response instance
+        mock_response = httpx.Response(
+            200, content=response_content, headers=response_headers
         )
+        mock_response.raise_for_status = Mock(return_value=None)
 
-        # Assert the response is the mocked response
-        assert response == mock_response
+        # Mock Client and Request
+        with patch("httpx.Client.send", return_value=mock_response) as mock_send:
+            with patch("httpx.Request", return_value="mock_request") as mock_request:
+                response = make_requests.send_request(
+                    method,
+                    url="http://test.com",
+                    headers={"Authorization": "Bearer token"},
+                    params=params,
+                    data=data,
+                    json=json_body,
+                )
 
-    def test_http_error(self, monkeypatch):
-        # Mock the httpx.Client.send method to raise an httpx.HTTPError
-        mock_response = MagicMock()
-        mock_response.raise_for_status.side_effect = httpx.HTTPError("HTTP Error")
-        monkeypatch.setattr("httpx.Client.send", lambda self, request: mock_response)
-
-        with pytest.raises(SendRequestError) as exc_info:
-            post_dict("https://example.com", {"Header": "Value"}, {"Param": "Value"})
-        assert (
-            str(exc_info.value)
-            == "HTTP error occurred while sending request to https://example.com"
-        )
-
-    def test_other_error(self, monkeypatch):
-        # Mock the httpx.Client.send method to raise a generic exception
-        monkeypatch.setattr(
-            "httpx.Client.send", lambda self, request: 1 / 0
-        )  # This will raise a ZeroDivisionError
-
-        with pytest.raises(ZeroDivisionError):
-            post_dict("https://example.com", {"Header": "Value"}, {"Param": "Value"})
-
-    @patch.object(httpx, "Request")
-    @patch.object(httpx.Client, "send")
-    def test_request_parameters(self, mock_send, mock_request):
-        # Mock the response
-        mock_response = MagicMock()
-        mock_response.raise_for_status.return_value = None
-        mock_send.return_value = mock_response
-
-        # Mock the request
-        mock_request_instance = MagicMock()
-        mock_request.return_value = mock_request_instance
-
-        # Call the function
-        post_dict("https://example.com", {"Header": "Value"}, {"Param": "Value"})
-
-        # Check the parameters passed to httpx.Request constructor
+        # Validate
         mock_request.assert_called_once_with(
-            "POST",
-            url="https://example.com",
-            headers={"Header": "Value"},
-            data={"Param": "Value"},
+            method,
+            url="http://test.com",
+            params=params,
+            headers={"Authorization": "Bearer token"},
+            data=data,
+            json=json_body,
+        )
+        mock_send.assert_called_once_with("mock_request")
+        assert response["status_code"] == 200
+        assert response["raw_data"] == response_content
+        assert response["json"] == expected_json
+        assert all(
+            response["headers"].get(key.lower()) == value.lower()
+            for key, value in response_headers.items()
         )
 
-        # Check that the mocked request object was passed to the send() method
-        mock_send.assert_called_once_with(mock_request_instance)
+    # Test for HTTPError
+    def test_send_request_http_error(self):
+        mock_response = Mock(spec=httpx.Response)
+        mock_response.raise_for_status.side_effect = httpx.HTTPError(
+            "Testing that we catch Error"
+        )
+
+        with patch("httpx.Client.send", return_value=mock_response):
+            with pytest.raises(make_requests.SendRequestError) as e:
+                make_requests.send_request("GET", url="http://test.com")
+            assert "Testing that we catch Error" in str(e.value)
+
+    # Test for generic Exception
+    def test_send_request_generic_error(self):
+        with patch(
+            "httpx.Client.send",
+            side_effect=Exception("Testing that we catch Error again"),
+        ):
+            with pytest.raises(Exception) as e:
+                make_requests.send_request("GET", url="http://test.com")
+            assert "Testing that we catch Error again" in str(e.value)
