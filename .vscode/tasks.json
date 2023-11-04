@@ -1,0 +1,41 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "func",
+			"label": "func: host start",
+			"command": "host start",
+			"problemMatcher": "$func-python-watch",
+			"isBackground": true,
+			"dependsOn": "poetry install (functions)"
+		},
+		{
+			"label": "poetry install (functions)",
+			"type": "shell",
+			"osx": {
+				"command": "poetry install --with test,dev  --no-interaction --no-root --sync"
+			},
+			"windows": {
+				"command": "poetry install --with test,dev  --no-interaction --no-root --sync"
+			},
+			"linux": {
+				"command": "poetry install --with test,dev  --no-interaction --no-root --sync"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "pip install (functions)",
+			"type": "shell",
+			"osx": {
+				"command": "${config:azureFunctions.pythonVenv}/bin/python -m pip install -r requirements.txt"
+			},
+			"windows": {
+				"command": "${config:azureFunctions.pythonVenv}\\Scripts\\python -m pip install -r requirements.txt"
+			},
+			"linux": {
+				"command": "${config:azureFunctions.pythonVenv}/bin/python -m pip install -r requirements.txt"
+			},
+			"problemMatcher": []
+		}
+	]
+}
