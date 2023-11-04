@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "ohme-client"
+version = "0.1.0"
+description = ""
+authors = ["mnbf9rca <mnbf9rca@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">3.9,<3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
