@@ -1,0 +1,171 @@
+[
+	{
+		"sessionId": "charger_id",
+		"mode": "RETRIEVING_SOC",
+		"appliedRule": {
+			"id": null,
+			"name": "Charge to full ASAP",
+			"enabled": true,
+			"maxPwrW": null,
+			"targetPercent": 100.0,
+			"targetTime": 12345,
+			"repeatDow": [
+				"SUNDAY"
+			],
+			"preconditioningEnabled": false,
+			"preconditionLengthMins": null,
+			"isMaxCharge": true,
+			"settings": null
+		},
+		"chargeGraph": {
+			"points": [
+				{
+					"x": 0.0,
+					"y": 0.0
+				},
+				{
+					"x": 1.0,
+					"y": 1.0
+				},
+				{
+					"x": 2.0,
+					"y": 2.0
+				}
+			],
+			"now": {
+				"x": 12.345,
+				"y": 5.0
+			},
+			"target": {
+				"x": 789.0,
+				"y": 123.0
+			},
+			"yunit": "WH"
+		},
+		"batterySoc": {
+			"wh": 12345,
+			"rangeKm": 123.0,
+			"percent": 43.0,
+			"timestamp": 1699204506000,
+			"highPrecision": true,
+			"maxRangeKm": null
+		},
+		"batterySocBefore": null,
+		"car": {
+			"id": "a_valid_car_id",
+			"manufacturerId": "vehicle_vin",
+			"manufacturerUserId": null,
+			"vin": "vehicle_vin",
+			"name": null,
+			"model": {
+				"id": "CAR TYPE EG BMW iX",
+				"make": "BMW",
+				"modelName": "iX",
+				"modelYear": 2023,
+				"availableFromYear": null,
+				"availableToYear": null,
+				"importSourceVersion": null,
+				"modelDetailName": "xDrive 12 Sport Packs",
+				"imageUrl": null,
+				"powerLimits": {
+					"maxDemandW": 7680,
+					"minDemandW": null,
+					"maxSupplyW": null,
+					"minSupplyW": null
+				},
+				"averageWhPerKm": 220,
+				"energyCapacityWh": 68000,
+				"specifiedRangeKm": 332,
+				"providesBatterySoc": true,
+				"rangeKm": 332.0
+			},
+			"ownerUserId": "owner_user_id",
+			"batterySoc": {
+				"wh": 12345,
+				"rangeKm": 123.0,
+				"percent": 43.0,
+				"timestamp": 1699204506000,
+				"highPrecision": true,
+				"maxRangeKm": null
+			},
+			"licensePlateId": null,
+			"startChargeSupported": false,
+			"vehicleStatus": {
+				"odometerReadingKm": 1234,
+				"maxSoc": null,
+				"rangeDisplaySelection": null,
+				"soc": {
+					"wh": 12345,
+					"rangeKm": 123.0,
+					"percent": 43.0,
+					"timestamp": 1699204506000,
+					"highPrecision": null,
+					"maxRangeKm": null
+				},
+				"climate": null,
+				"chargingStatus": "UNPLUGGED",
+				"availableChargingPowerW": null,
+				"chargingSpeedKmh": null,
+				"timestamp": 1699186341000
+			},
+			"userNotes": null,
+			"userDefined": false
+		},
+		"chargeDevice": {
+			"id": "charger_id",
+			"externalId": null,
+			"name": null,
+			"firmwareVersion": 202212011,
+			"paygProductId": null,
+			"maxAmpOverride": null,
+			"confirmedMaxAmpOverride": null,
+			"minVoltageOverride": null,
+			"maxVoltageOverride": null,
+			"confirmedMinVoltageOverride": null,
+			"confirmedMaxVoltageOverride": null,
+			"virtualChargerForCarId": null,
+			"location": {
+				"lat": 12.345,
+				"long": 1.234,
+				"accuracy": null,
+				"countryCode": "GB"
+			},
+			"address": null,
+			"groupIds": null,
+			"modelType": "HOME_PRO",
+			"modelTypeDisplayName": "Ohme Home Pro",
+			"modelCapabilities": null,
+			"optionalSettings": {
+				"buttonsLocked": false,
+				"stealthEnabled": true,
+				"pluginsRequireApproval": false,
+				"avoidPeakCharging": true,
+				"randomisedDelaySeconds": 600,
+				"allowInstallerMode": null,
+				"solarMode": null,
+				"allSucceeded": null
+			},
+			"provisioningTs": 1699204506000,
+			"firmwareVersionLabel": "v1.32_202212011",
+			"loadBalancingEnabled": null,
+			"loadBalancingMaxAmps": null,
+			"solarLearnMoreUrl": null
+		},
+		"power": null,
+		"error": null,
+		"errors": null,
+		"chargeStats": null,
+		"targetTime": 1699204506000,
+		"startTime": 1699204506000,
+		"finishTime": null,
+		"location": null,
+		"destinationCharge": null,
+		"chargeLocationType": null,
+		"nextChargeAtWorkId": null,
+		"preconditioning": null,
+		"preconditioningInfo": null,
+		"solarCharging": false,
+		"solarProportion": null,
+		"suspendedRule": null
+	}
+]

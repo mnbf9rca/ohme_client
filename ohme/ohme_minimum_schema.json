@@ -1,0 +1,142 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://cynexia.com/schemas/ohme_minimum_shema.json",
+    "version": "1.0.0",
+    "type": "object",
+    "properties": {
+        "sessionId": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "mode": {
+            "type": "string"
+        },
+        "chargeStats": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "moneyCostTotal": {
+                            "type": "number"
+                        },
+                        "batteryScore": {
+                            "type": "number"
+                        },
+                        "batteryCycleUsePercent": {
+                            "type": "integer"
+                        },
+                        "energyChargedTotalWh": {
+                            "type": "integer"
+                        },
+                        "rangeAddedKm": {
+                            "type": "number"
+                        },
+                        "chargeSpeedKmhCurrent": {
+                            "type": [
+                                "number",
+                                "null"
+                            ]
+                        },
+                        "activeChargeMs": {
+                            "type": "integer"
+                        }
+                    },
+                    "required": [
+                        "moneyCostTotal",
+                        "batteryScore",
+                        "batteryCycleUsePercent",
+                        "energyChargedTotalWh",
+                        "rangeAddedKm",
+                        "chargeSpeedKmhCurrent",
+                        "activeChargeMs"
+                    ]
+                }
+            ]
+        },
+        "targetTime": {
+            "type": "integer"
+        },
+        "startTime": {
+            "type": "integer"
+        },
+        "finishTime": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "power": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "watt": {
+                            "type": "integer"
+                        },
+                        "volt": {
+                            "type": "integer"
+                        },
+                        "amp": {
+                            "type": "number"
+                        },
+                        "rangeKmh": {
+                            "type": "integer"
+                        }
+                    },
+                    "required": [
+                        "watt",
+                        "volt",
+                        "amp",
+                        "rangeKmh"
+                    ]
+                }
+            ]
+        },
+        "error": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "errors": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "chargeDevice": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "modelType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "modelType"
+            ]
+        }
+    },
+    "required": [
+        "sessionId",
+        "mode",
+        "chargeStats",
+        "targetTime",
+        "startTime",
+        "finishTime",
+        "power",
+        "error",
+        "errors",
+        "chargeDevice"
+    ],
+    "additionalProperties": true
+}

@@ -1,0 +1,209 @@
+[
+    {
+        "sessionId": "session_id",
+        "mode": "DISCONNECTED",
+        "appliedRule": {
+            "id": "applied_rule_id",
+            "name": "(adjusted) Afternoon Commute",
+            "enabled": true,
+            "maxPwrW": 0,
+            "targetPercent": 80.0,
+            "targetTime": 12345,
+            "repeatDow": [
+                "FRIDAY"
+            ],
+            "preconditioningEnabled": false,
+            "preconditionLengthMins": 20,
+            "isMaxCharge": false,
+            "settings": [
+                {
+                    "enabled": false,
+                    "value": 10.01,
+                    "svalue1": null,
+                    "svalue2": null,
+                    "type": "MAX_PRICE"
+                }
+            ]
+        },
+        "chargeGraph": {
+            "points": [
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 1.0,
+                    "y": 1.0
+                },
+                {
+                    "x": 2.0,
+                    "y": 2.0
+                }
+            ],
+            "now": {
+                "x": 12.345,
+                "y": 5.0
+            },
+            "target": {
+                "x": 789.0,
+                "y": 123.0
+            },
+            "yunit": "WH"
+        },
+        "batterySoc": {
+            "wh": 12345,
+            "rangeKm": 123.0,
+            "percent": 43.0,
+            "timestamp": 1699204506000,
+            "highPrecision": true,
+            "maxRangeKm": null
+        },
+        "batterySocBefore": null,
+        "car": {
+            "id": "a_valid_car_id",
+            "manufacturerId": "vehicle_vin",
+            "manufacturerUserId": null,
+            "vin": "vehicle_vin",
+            "name": null,
+            "model": {
+                "id": "CAR TYPE EG BMW iX",
+                "make": "BMW",
+                "modelName": "iX",
+                "modelYear": 2023,
+                "availableFromYear": null,
+                "availableToYear": null,
+                "importSourceVersion": null,
+                "modelDetailName": "xDrive 12 Sport Packs",
+                "imageUrl": null,
+                "powerLimits": {
+                    "maxDemandW": 7680,
+                    "minDemandW": null,
+                    "maxSupplyW": null,
+                    "minSupplyW": null
+                },
+                "averageWhPerKm": 220,
+                "energyCapacityWh": 68000,
+                "specifiedRangeKm": 306,
+                "providesBatterySoc": true,
+                "rangeKm": 306.0
+            },
+            "ownerUserId": "owner_user_id",
+            "batterySoc": {
+                "wh": 12345,
+                "rangeKm": 123.0,
+                "percent": 43.0,
+                "timestamp": 1699204506000,
+                "highPrecision": true,
+                "maxRangeKm": null
+            },
+            "licensePlateId": null,
+            "startChargeSupported": false,
+            "vehicleStatus": {
+                "odometerReadingKm": 1234,
+                "maxSoc": null,
+                "rangeDisplaySelection": null,
+                "soc": {
+                    "wh": 12345,
+                    "rangeKm": 123.0,
+                    "percent": 43.0,
+                    "timestamp": 1699204506000,
+                    "highPrecision": true,
+                    "maxRangeKm": null
+                },
+                "climate": null,
+                "chargingStatus": "CHARGING",
+                "availableChargingPowerW": null,
+                "chargingSpeedKmh": null,
+                "timestamp": 1699024206000
+            },
+            "userNotes": null,
+            "userDefined": false
+        },
+        "chargeDevice": {
+            "id": "charger_id",
+            "externalId": null,
+            "name": null,
+            "firmwareVersion": 202212011,
+            "paygProductId": null,
+            "maxAmpOverride": null,
+            "confirmedMaxAmpOverride": null,
+            "minVoltageOverride": null,
+            "maxVoltageOverride": null,
+            "confirmedMinVoltageOverride": null,
+            "confirmedMaxVoltageOverride": null,
+            "virtualChargerForCarId": null,
+            "location": {
+                "lat": 12.345,
+                "long": 1.234,
+                "accuracy": null,
+                "countryCode": "GB"
+            },
+            "address": null,
+            "groupIds": null,
+            "modelType": "HOME_PRO",
+            "modelTypeDisplayName": "Ohme Home Pro",
+            "modelCapabilities": null,
+            "optionalSettings": {
+                "buttonsLocked": false,
+                "stealthEnabled": true,
+                "pluginsRequireApproval": false,
+                "avoidPeakCharging": true,
+                "randomisedDelaySeconds": 600,
+                "allowInstallerMode": null,
+                "solarMode": null,
+                "allSucceeded": null
+            },
+            "provisioningTs": 1699204506000,
+            "firmwareVersionLabel": "v1.32_202212011",
+            "loadBalancingEnabled": null,
+            "loadBalancingMaxAmps": null,
+            "solarLearnMoreUrl": null
+        },
+        "power": null,
+        "error": null,
+        "errors": null,
+        "chargeStats": {
+            "currency": "£",
+            "currencyCode": "GBP",
+            "moneyCostTotal": 1.234,
+            "moneyCostRegularCableTotal": 1.234,
+            "moneyCostPerKm": 0.022,
+            "carbonReleasedGreenScore": 4.321,
+            "carbonReleasedPerKmGrams": 12,
+            "carbonReleasedGrams": 1234,
+            "carbonReleasedRegularCableGrams": 1234,
+            "carbonReleasedGasCarGrams": 1234,
+            "comparedGasCarLabel": "28 mpg",
+            "batteryScore": 0.0,
+            "batteryCycleUsePercent": 12,
+            "energyChargedTotalWh": 12345,
+            "rangeAddedKm": 123.456,
+            "chargeSpeedKmhCurrent": null,
+            "activeChargeMs": 12345,
+            "moneyCostSolarSavings": null,
+            "energyChargedSolarWh": null,
+            "carbonSavedVsGasCarGrams": 12345,
+            "moneyCostTotalSavingsVsRegularCable": 0.0,
+            "carbonSavedVsRegularCableGrams": 0,
+            "averageCarbonReleasedPerKwh": 50,
+            "moneyCostTotalSavingsPercentVsRegularCable": 0
+        },
+        "targetTime": 1699204506000,
+        "startTime": 1699204506000,
+        "finishTime": 1699204506000,
+        "location": {
+            "lat": 12.345,
+            "long": 1.234,
+            "accuracy": null,
+            "countryCode": "GB"
+        },
+        "destinationCharge": null,
+        "chargeLocationType": "HOME",
+        "nextChargeAtWorkId": null,
+        "preconditioning": null,
+        "preconditioningInfo": null,
+        "solarCharging": null,
+        "solarProportion": null,
+        "suspendedRule": null
+    }
+]
