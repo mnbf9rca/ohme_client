@@ -22,12 +22,6 @@
                         "moneyCostTotal": {
                             "type": "number"
                         },
-                        "batteryScore": {
-                            "type": "number"
-                        },
-                        "batteryCycleUsePercent": {
-                            "type": "integer"
-                        },
                         "energyChargedTotalWh": {
                             "type": "integer"
                         },
@@ -99,15 +93,33 @@
             ]
         },
         "error": {
-            "type": [
-                "string",
-                "null"
-            ]
-        },
-        "errors": {
-            "type": [
-                "string",
-                "null"
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "expected_charging_w": {
+                            "type": "string"
+                        },
+                        "fallbackMsg": {
+                            "type": "string"
+                        },
+                        "charging_w": {
+                            "type": "string"
+                        },
+                        "msgType": {
+                            "type": "string"
+                        },
+                        "msgId": {
+                            "type": "string"
+                        },
+                        "msgSentTs": {
+                            "type": "string"
+                        }
+                    }
+                }
             ]
         },
         "chargeDevice": {

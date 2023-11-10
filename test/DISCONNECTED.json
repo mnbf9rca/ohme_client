@@ -1,6 +1,6 @@
 [
     {
-        "sessionId": "session_id",
+        "sessionId": "session_id_DISCONNECTED",
         "mode": "DISCONNECTED",
         "appliedRule": {
             "id": "applied_rule_id",

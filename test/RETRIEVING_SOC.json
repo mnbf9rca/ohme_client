@@ -1,6 +1,6 @@
 [
 	{
-		"sessionId": "charger_id",
+		"sessionId": "session_id_RETRIEVING_SOC",
 		"mode": "RETRIEVING_SOC",
 		"appliedRule": {
 			"id": null,
